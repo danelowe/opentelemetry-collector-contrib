@@ -59,7 +59,7 @@ func TestCreateLegacyExporter(t *testing.T) {
 	ctx := context.Background()
 	factory := NewFactory()
 	cfg := factory.CreateDefaultConfig()
-	eCfg := cfg.(*Config)
+	eCfg := cfg.(*LegacyConfig)
 	eCfg.ProjectID = "test"
 
 	te, err := factory.CreateTracesExporter(ctx, componenttest.NewNopExporterCreateSettings(), eCfg)

@@ -15,6 +15,9 @@
 package components // import "github.com/open-telemetry/opentelemetry-collector-contrib/internal/components"
 
 import (
+	"github.com/open-telemetry/opentelemetry-collector-contrib/receiver/elasticsearchreceiver"
+	"github.com/open-telemetry/opentelemetry-collector-contrib/receiver/nginxreceiver"
+	"github.com/open-telemetry/opentelemetry-collector-contrib/receiver/rabbitmqreceiver"
 	"go.opentelemetry.io/collector/component"
 	"go.opentelemetry.io/collector/exporter/loggingexporter"
 	"go.opentelemetry.io/collector/exporter/otlpexporter"
@@ -183,6 +186,7 @@ func Components() (component.Factories, error) {
 		collectdreceiver.NewFactory(),
 		dockerstatsreceiver.NewFactory(),
 		dotnetdiagnosticsreceiver.NewFactory(),
+		elasticsearchreceiver.NewFactory(),
 		filelogreceiver.NewFactory(),
 		fluentforwardreceiver.NewFactory(),
 		googlecloudspannerreceiver.NewFactory(),
@@ -199,12 +203,14 @@ func Components() (component.Factories, error) {
 		memcachedreceiver.NewFactory(),
 		mongodbatlasreceiver.NewFactory(),
 		mysqlreceiver.NewFactory(),
+		nginxreceiver.NewFactory(),
 		opencensusreceiver.NewFactory(),
 		otlpreceiver.NewFactory(),
 		podmanreceiver.NewFactory(),
 		postgresqlreceiver.NewFactory(),
 		prometheusexecreceiver.NewFactory(),
 		prometheusreceiver.NewFactory(),
+		rabbitmqreceiver.NewFactory(),
 		receivercreator.NewFactory(),
 		redisreceiver.NewFactory(),
 		sapmreceiver.NewFactory(),
