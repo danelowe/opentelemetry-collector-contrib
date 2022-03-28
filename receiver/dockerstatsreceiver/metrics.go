@@ -16,13 +16,12 @@ package dockerstatsreceiver // import "github.com/open-telemetry/opentelemetry-c
 
 import (
 	"fmt"
-	"sort"
-	"strconv"
-	"strings"
-
 	dtypes "github.com/docker/docker/api/types"
 	"go.opentelemetry.io/collector/model/pdata"
 	conventions "go.opentelemetry.io/collector/model/semconv/v1.6.1"
+	"sort"
+	"strconv"
+	"strings"
 
 	"github.com/open-telemetry/opentelemetry-collector-contrib/internal/docker"
 )
@@ -233,6 +232,9 @@ func populateCumulative(dest pdata.Metric, name string, unit string, val int64, 
 	dp := sum.DataPoints().AppendEmpty()
 	dp.SetIntVal(val)
 	dp.SetTimestamp(ts)
+	// https://github.com/open-telemetry/opentelemetry-collector/issues/5102
+	// https://github.com/GoogleCloudPlatform/opentelemetry-operations-go/issues/335
+	// For now I've edited the code in opentelemetry-operations-go to allow 1970 as 0 too
 	populateAttributes(dp.Attributes(), labelKeys, labelValues)
 }
 
@@ -247,6 +249,9 @@ func populateCumulativeMultiPoints(dest pdata.Metric, name string, unit string, 
 		dp := dps.AppendEmpty()
 		dp.SetIntVal(vals[i])
 		dp.SetTimestamp(ts)
+		// https://github.com/open-telemetry/opentelemetry-collector/issues/5102
+		// https://github.com/GoogleCloudPlatform/opentelemetry-operations-go/issues/335
+		// For now I've edited the code in opentelemetry-operations-go to allow 1970 as 0 too
 		populateAttributes(dp.Attributes(), labelKeys, labelValues[i])
 	}
 }
